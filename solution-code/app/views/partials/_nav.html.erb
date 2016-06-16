@@ -1,6 +1,6 @@
 <%= link_to "Home", root_path %>
 
-<% if current_user %>
+<% if @current_user %>
 
 <%= link_to "Profile", user_path(current_user) %>
 

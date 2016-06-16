@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    redirect_to current_user if current_user 
+    redirect_to @current_user if @current_user 
   end
 
   def create
