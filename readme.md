@@ -289,6 +289,9 @@ class User < ActiveRecord::Base
 end
 ```
 
+###Challenge: Unique emails
+
+Write a test that validates the uniquness of emails, watch it fail, then write the code that passes it.
 
 ## Routes, Controllers, & Views for Signup
 
