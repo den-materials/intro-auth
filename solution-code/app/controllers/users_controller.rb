@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_login, only: :index
+  #only logged in users can see profile pages
+  before_action :require_login, only: :show
 
   # to illustrate a before_action
   def index
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = @current_user
+    @user = User.find(params[:id])
   end
 
   private

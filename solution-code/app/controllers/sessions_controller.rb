@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  include SessionsHelper
+
   def new
     redirect_to @current_user if @current_user 
   end
@@ -18,7 +20,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete(:user_id)
+    # `logout` method defined in helper file
+    logout
     redirect_to root_path
   end
 end
