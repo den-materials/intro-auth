@@ -261,20 +261,7 @@ class User < ActiveRecord::Base
   # the fields are match against each other but never persisted to the database
   validates_confirmation_of :password
   # TODO: add validator for unique emails
-
-  # to authenticate the user using bcrypt's built in 
-  def authenticate(unencrypted_password)
-    secure_password = BCrypt::Password.new(self.password_digest)
-    # check that a hashed version of the unencrypted password is the same as the secure password
-    # the method `==` has been modified for `secure_password` to first hash whatever it's comparing to
-    if secure_password == unencrypted_password
-      # return the user
-      self
-    else
-      false
-    end
-  end
-
+  
   def password=(unencrypted_password)
     #raise scope of password to instance
     @password = unencrypted_password
@@ -284,6 +271,12 @@ class User < ActiveRecord::Base
   def password
     #get password, equivalent to `attr_reader :password`
     @password
+  end
+
+  # to authenticate the user using bcrypt's built in 
+  def authenticate(unencrypted_password)
+    # check that a hashed version of the unencrypted password is the same as the secure password
+    BCrypt::Password.new(self.password_digest) == unencrypted_password ? self : false
   end
 
   # class method `::confirm`
