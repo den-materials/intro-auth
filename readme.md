@@ -56,6 +56,8 @@ Think of a digested password as a firework. It is very easy to explode a firewor
 
 ![fireworks](http://i.giphy.com/122XXtx3oumxBm.gif)
 
+<!--Math explanation on board -->
+
 ## App Setup
 
 Let's start a new Rails application:
@@ -459,7 +461,7 @@ Tip: Try running `rake notes` to see all the items that have been marked as `TOD
 
 Since we need to authenticate each request and to do so we have to read the `user_id` out of the `session` object, let's consider making a few helper methods to do so.
 
-A login for a user is when we set a unique identifier for a user in their session, aka `session[:user_id] = user.id`, so they are able to maintain their logged-in state by sending that unique piece of data back to us each time they send a new request. What is we could have a helper method that does this for us and caches the value of the  `current_user` for the duration of each request?
+A login for a user is when we set a unique identifier for a user in their session, aka `session[:user_id] = user.id`, so they are able to maintain their logged-in state by sending that unique piece of data back to us each time they send a new request. To make this easier, we could have a helper method that does this for us and caches the value of the  `current_user` for the duration of each request?
 
 ```ruby
 class ApplicationController < ActionController::Base
