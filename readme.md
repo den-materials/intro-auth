@@ -1,27 +1,33 @@
 ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
+<!--9:00 5 minutes -->
+
+<!-- Hook: How did you all like the video from last night?  So what were our 3 ways *not* to store passwords?  So why do we think coders often neglect security?
+
+One of the main reasons is "it takes too much time".  Well, today we'll show you a way that Rails takes care of it for us, so we don't need to spend all that time.  Today, we'll talk about authentication, but specifically, we'll be using bCrypt to take some of that responsibility off our shoulders so all we need to do with the latest, greatest security hole that shows up is...upgrade to the latest version and exhale. -->
+
 #Auth in Rails
 
 ### Why is this important?
 <!-- framing the "why" in big-picture/real world examples -->
 *This workshop is important because:*
 
-Authenticating users is key to authorizing who is allows to do what in an application. We need to impliment these concepts in order to create and experience where users can have differentiated experiences on the application. For example, when we go to Feedly, we'd like to see new stories customized for each of our profiles, and when others go to gmail, we'd like them prevented from accessing our emails. 
+Authenticating users is key to authorizing who is allowed to do what in an application. We need to impliment these concepts in order to create an experience where users can have differentiated experiences on the application. For example, when we go to Twitter, we'd like to see new tweets customized for each of our profiles, and when other people go to gmail, we'd like them prevented from accessing our emails. 
 
 ### What are the objectives?
 <!-- specific/measurable goal for students to achieve -->
 *After this workshop, developers will be able to:*
 
-* Implement an authentication system in Rails that securely stores users' passwords
-* Build routes, controllers, and views necessary for a user to signup & login
+* **Implement** an authentication system in Rails that securely stores users' passwords
+* **Build** routes, controllers, and views necessary for a user to signup & login
 
 ### Where should we be now?
 <!-- call out the skills that are prerequisites -->
 *Before this workshop, developers should already be able to:*
 
-* Illustrate the request/response cycle
-* Compare and contrast sessions & cookies
-* Build an MVC Rails application
+* **Illustrate** the request/response cycle
+* **Compare** and **contrast** sessions & cookies
+* **Build** an MVC Rails application
 
 ## Authentication / Authorization
 
@@ -32,6 +38,11 @@ A user must always first be authenticated, then it can be determined what they a
 
 >Example: When Sarah enters a bar, a bouncer looks at her photo ID to ensure (authenticate) that she is who she claims. Sarah is thirty years old so she is allowed (authorized) to drink.
 
+<!-- Imprivata example with fingerprints: so first, you say you are Dr. Murphy.  Is this Dr. Murphy's fingerprint?  No?  Sorry Dr. Stevens, nice try.  Go get Dr. Murphy and try again.  OK, that's Dr. Murphy.  You are "authenticated".  You want to sign a prescription?  Go for it, you are "authorized" for that.  An hour later...OK, this person is saying they are *Nurse* Murphy.  Is this their fingerprint?  Yes, they are "authenticated".  You want to sign a prescription?  Ummm, you're not a doctor, you're not "authorized" for that.  Nice try.
+
+Parking Lot: Authentication vs Verification with Fingerprints: need to match binary strings to match a certain percentage of accuracy in whole DB vs one entry-->
+
+<!-- Catch-phrase authentication and authorization -->
 
 ##Password Hashing
 
@@ -98,9 +109,11 @@ BCrypt::Password.instance_method(:==) == Array.instance_method(:==)
 => false
 ```
 
-How will Bcypts `==` help us **authenticate** a `User`?
+How will BCrypt `==` help us **authenticate** a `User`?
 
 [BCrypt](https://en.wikipedia.org/wiki/Bcrypt) uses ["salt"](https://en.wikipedia.org/wiki/Salt_(cryptography)) to protect against [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table) attacks and is an [adaptive function](https://codiscope.com/cryptographic-hash-functions/) (see section: "Adaptive Hash Functions") to protect against [brute-force](https://en.wikipedia.org/wiki/Brute-force_search) attacks.
+
+<!-- Catch-phrase with brute-force, one-way hash, adaptive hash, salt, bcrypt -->
 
 ## Test Setup
 
@@ -139,6 +152,8 @@ rake db:migrate
 Now we can ensure we build our `User` model to specifications by passing some tests we've been given!
 
 Inside the directory `spec` overwrite the existing file `/models/user_spec.rb` with the below tests.
+
+<!--Half-mast whip around explain in own words each of these tests -->
 
 ```ruby
 require "rails_helper"
@@ -249,7 +264,9 @@ rspec
 
 In the process of passing these tests we will build all the logic for an authentication system! You should never have to write this code from scratch, but it is very important you understand what is going on.
 
->Exercise: Think, pair, share on what the below code is doing (7 minutes).
+<!-- 7 minutes -->
+
+>Exercise: Think, pair, share on what the below code is doing.
 
 ```ruby
 class User < ActiveRecord::Base
@@ -291,7 +308,9 @@ end
 
 ###Challenge: Unique emails
 
-Write a test that validates the uniquness of emails, watch it fail, then write the code that passes it.
+Write a test that validates the uniqueness of emails, watch it fail, then write the code that passes it.
+
+<!--Beginning of lab 10:30 -->
 
 ## Routes, Controllers, & Views for Signup
 
@@ -312,9 +331,12 @@ Let's get started!
 
 ## Routes
 
+<!--Run rake routes before doing this, so devs can see change -->
+
 Let's edit our `config/routes.rb` file...
 
-
+<details>
+<summary>Hints for routes file</summary>
 ```ruby
 Rails.application.routes.draw do
 
@@ -330,8 +352,8 @@ Rails.application.routes.draw do
 
 end
 ```
-
-If you haven't seen it before, `resources` will auto generate all the RESTful routes for a `User`.
+</details>
+Our old friend, `resources`, will auto generate all the RESTful routes for a `User`.
 
 Run `rake routes` to see all the application's routes.
 
@@ -339,8 +361,8 @@ Run `rake routes` to see all the application's routes.
 
 **Challenge:** Start your application and pass these user stories. On the `root_path`:
 
-* A user can see a welcome message`
-* A user can click a "Sign Up" button that directs them to the `sign_up_path`
+* A user can see a welcome message
+* A user can click a "Sign Up" link or button that directs them to the `sign_up_path`
 
 ## Controllers
 
@@ -348,8 +370,8 @@ Run `rake routes` to see all the application's routes.
 
 * Let's add a private method that creates strong parameters for specific attributes of the user
 
-You should end up something along the lines of...
-
+<details>
+<summary>You should end up with something along the lines of...</summary>
 ```ruby
 class UsersController < ApplicationController
   
@@ -371,7 +393,7 @@ class UsersController < ApplicationController
 
 end
 ```
-
+</details>
 ##Challenge: Implement Signup
 
 ####Step 1
@@ -395,7 +417,7 @@ end
 
 <h3 id="session_creation">Login</h3>
 
-Since creating a session is essentially what we mean when want to login, and logging out is destroying a session. We have a single controller dedicated to session management, `SessionsController`.
+Since creating a session is essentially what we mean when we want to login, and logging out is destroying a session. We have a single controller dedicated to session management, `SessionsController`.
 
 `app/controllers/sessions_controller.rb`
 
@@ -605,6 +627,8 @@ end
 * What does it mean for a user to be "logged in"?
 
 ##Additional Resources
+
+<!--Note youtube link below says 42 meaning 46, but otherwise solid-->
 
 * [Rails Tutorial: login & logout](https://www.railstutorial.org/book/log_in_log_out)
 * [Devise](https://github.com/plataformatec/devise)
