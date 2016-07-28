@@ -476,7 +476,7 @@ end
 
 The above method defines `@current_user` if it is not already defined. The way the `&&` operator works is that it will keep evaluating if `session[:user_id]` is defined and then set `@current_user` to whatever the *last item* evaluated is; in this case it would be `User.find_by_id(session[:user_id])`, so the user itself.
 
->Prefer `find_by_id(<id>)` instead of `find(<id>)`, as it does not rails an exception, but instead returns `nil` if the id is invalid.
+>Prefer `find_by_id(<id>)` instead of `find(<id>)`, as it does not raise an exception, but instead returns `nil` if the id is invalid.
 
 The method `current_user` in is very useful for:
 
