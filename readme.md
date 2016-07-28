@@ -480,7 +480,7 @@ The above method defines `@current_user` if it is not already defined. The way t
 
 >Prefer `find_by_id(<id>)` instead of `find(<id>)`, as it does not raise an exception, but instead returns `nil` if the id is invalid.
 
-The method `current_user` in is very useful for:
+The method `current_user` is very useful for:
 
 * **Conditional views** based on the `current_user`'s state
 	* I.e. is a login or logout button displayed in the nav_bar?
