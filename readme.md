@@ -269,7 +269,7 @@ In the process of passing these tests we will build all the logic for an authent
 >Exercise: Think, pair, share on what the below code is doing.
 
 ```ruby
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   BCrypt::Engine.cost = 12
 
   # email & password_digest fields must exist
@@ -429,7 +429,9 @@ class SessionsController < ApplicationController
 
   def create
     #call the User#confirm method
-    if User.confirm(params[:email], params[:password])
+    incoming_user = params[:user]
+    user = User.confirm(incoming_user[:email], incoming_user[:password])
+    if user
       # this creates the session, logging in the user
       session[:user_id] = user.id
       #redirect to the show page
