@@ -365,6 +365,8 @@ Run `rake routes` to see all the application's routes.
 
 * A user can see a welcome message
 * A user can click a "Sign Up" link or button that directs them to the `sign_up_path`
+ 
+>Note: The root path redirects to a "welcome#index" action.  We need to create a controller and corresponding view for this.  How would you do that?
 
 ## Controllers
 
