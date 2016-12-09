@@ -2,7 +2,7 @@
 
 <!--11:00 10 minutes -->
 
-<!-- Hook: How did you all like the video from last night?  So what were our 3 ways *not* to store passwords?  So why do we think coders often neglect security?
+<!-- Hook: So why do we think coders often neglect security?
 
 One of the main reasons is "it takes too much time".  Well, today we'll show you a Node library that takes care of it for us, so we don't need to spend all that time.  Today, we'll talk about authentication, but specifically, we'll be using bCrypt and Passport to take some of that responsibility off our shoulders so all we need to do with the latest, greatest security hole that shows up is...upgrade to the latest version and exhale. -->
 
@@ -19,7 +19,7 @@ Authenticating users is key to authorizing who is allowed to do what in an appli
 *After this workshop, developers will be able to:*
 
 * **Describe** an authentication system that securely stores users' passwords
-<!--something else to go here -->
+* **Describe** the role that BCrypt plays in authentication
 
 ### Where should we be now?
 <!-- call out the skills that are prerequisites -->
@@ -64,7 +64,7 @@ Think of a digested password as a firework. It is very easy to explode a firewor
 Something like take a password, convert it to binary, break it up into three words of 8 bits, and then do something like (A&&B||C for digit 1, A||B&&C for digit 2, A&&B&&C for digit 3, etc.)
 -->
 
-<!--11:45 15 minutes -->
+<!--11:45 20 minutes -->
 
 ## BCrypt
 
@@ -74,15 +74,74 @@ Remember, remember: **never store plaintext passwords**, only the digested versi
 
 ### Playing With `BCrypt`
 
-<!--We shoud have a simple node project here that just requires bCrypt and hashes a password, then we should console it out.-->
+Let's create a new project to test `BCrypt`.  This will require us to:
 
-How will BCrypt `==` help us **authenticate** a `User`?
+- Make a new directory
+- Go inside the directory and set it up as an `npm` project and install the `bcrypt` package
+- Create a `server.js` file
+- Require `bcrypt` at the top of `server.js`
+
+Now let's show how bcrypt creates a hashed digest of a password, and how it can test for equality of our "exploded password fireworks".
+
+First, we should create two passwords.
+
+<!--
+const myPassword = 'not_bacon';
+const otherPassword = 'bacon';-->
+
+Next, we need to generate a salt.  We will do this with bcrypt's `genSalt()` function.
+
+<!--
+bcrypt.genSalt(function(err, salt) {
+	console.log("Salt: " + salt);
+}); -->
+
+Then, we need to generate a hash for our password, mixing the salt with our password before we do so.
+
+<!--
+bcrypt.hash(myPassword, salt, function(err, hash) {
+    console.log("Salty hash: " + hash);
+}); -->
+
+Finally, let's check to see if our "exploded firework" matches our original password if we "explode" (hash) it again.  While we're at it, let's check to make sure it *doesn't* match our other password.
+
+<!--
+bcrypt.compare(myPassword, hash, function(err, res) {
+    console.log("My password and hash match: " + res);
+});
+bcrypt.compare(otherPassword, hash, function(err, res) {
+    console.log("Other password and hash match: " + res);
+});		-->
+
+<details>
+<summary>Sample code</summary>
+```js
+const bcrypt = require('bcrypt');
+const myPassword = 'not_bacon';
+const otherPassword = 'bacon';
+
+bcrypt.genSalt(function(err, salt) {
+	console.log("Salt: " + salt);
+  bcrypt.hash(myPassword, salt, function(err, hash) {
+      console.log("Salty hash: " + hash);
+      bcrypt.compare(myPassword, hash, function(err, res) {
+			    console.log("My password and hash match: " + res);
+			});
+      bcrypt.compare(otherPassword, hash, function(err, res) {
+			    console.log("Other password and hash match: " + res);
+			});				
+  });
+});
+```
+</details>
+
+How will BCrypt's compare method help us **authenticate** a `User`?
 
 [BCrypt](https://en.wikipedia.org/wiki/Bcrypt) uses a ["salt"](https://en.wikipedia.org/wiki/Salt_(cryptography)) to protect against [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table) attacks and is an [adaptive function](https://codiscope.com/cryptographic-hash-functions/) (see section: "Adaptive Hash Functions") to protect against [brute-force](https://en.wikipedia.org/wiki/Brute-force_search) attacks.
 
 <!-- Catch-phrase with encryption, hash, salt, bcrypt -->
 
-<!--12:00 5 minutes -->
+<!--12:05 5 minutes -->
 
 ## Closing Thoughts
 
