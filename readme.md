@@ -43,6 +43,8 @@ A user must always first be authenticated, then it can be determined what they a
 
 <!-- Catch-phrase authentication and authorization -->
 
+<!--11:15 actually -->
+
 <!--11:20 15 minutes -->
 
 ## Password Hashing
@@ -74,6 +76,8 @@ Remember, remember: **never store plaintext passwords**, only the digested versi
 
 ### Playing With `BCrypt`
 
+<!--11:44 when turning over to devs, math explanation took a while, other stuff was fast -->
+
 Let's create a new project to test `BCrypt`.  This will require us to:
 
 - Make a new directory
@@ -82,6 +86,8 @@ Let's create a new project to test `BCrypt`.  This will require us to:
 - Require `bcrypt` at the top of `server.js`
 
 Now let's show how bcrypt creates a hashed digest of a password, and how it can test for equality of our "exploded password fireworks".
+
+<!--bCrypt is really bad at requiring a WHOLE BUNCH of stuff for configuration (python EVN variables, command-line tools)-->
 
 First, we should create two passwords.
 
@@ -102,6 +108,8 @@ Then, we need to generate a hash for our password, mixing the salt with our pass
 bcrypt.hash(myPassword, salt, function(err, hash) {
     console.log("Salty hash: " + hash);
 }); -->
+
+<!--12:09 actually holy shit bcrypt laying down on the job, are you?  so many things breaking dev's projects -->
 
 Finally, let's check to see if our "exploded firework" matches our original password if we "explode" (hash) it again.  While we're at it, let's check to make sure it *doesn't* match our other password.
 
@@ -149,6 +157,8 @@ How will BCrypt's compare method help us **authenticate** a `User`?
 * How should we not store passwords?
 * Why is BCrypt useful and how do we use it to authenticate a user
 * How do salts work with hashing?
+
+<!--12:33-->
 
 ## Additional Resources
 
