@@ -1,5 +1,7 @@
 ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
+
+<!--11:25 WDI3 -->
 <!--11:00 10 minutes -->
 
 <!-- Hook: So why do we think coders often neglect security?
@@ -37,14 +39,16 @@ A user must always first be authenticated, then it can be determined what they a
 
 >Example: When Sarah enters a bar, a bouncer looks at her photo ID to ensure (authenticate) that she is who she claims. Sarah is thirty years old, so she is allowed (authorized) to drink.
 
+<!--11:30 WDI3 -->
 <!--11:10 10 minutes -->
 
 <!-- Imprivata example with fingerprints: so first, you say you are Dr. Murphy.  Is this Dr. Murphy's fingerprint?  No?  Sorry Dr. Stevens, nice try.  Go get Dr. Murphy and try again.  OK, that's Dr. Murphy.  You are "authenticated".  You want to sign a prescription?  Go for it, you are "authorized" for that.  An hour later...OK, this person is saying they are *Nurse* Murphy.  Is this their fingerprint?  Yes, they are "authenticated".  You want to sign a prescription?  Ummm, you're not a doctor, you're not "authorized" for that.  Nice try.-->
 
 <!-- Catch-phrase authentication and authorization -->
 
-<!--11:15 actually -->
+<!--11:15 actually WDI2-->
 
+<!--11:35 WDI3 -->
 <!--11:20 15 minutes -->
 
 ## Password Hashing
@@ -59,6 +63,7 @@ Think of a digested password as a firework. It is very easy to explode a firewor
 
 ![fireworks](http://i.giphy.com/122XXtx3oumxBm.gif)
 
+<!--WDI3 ??-->
 <!--11:35 10 minutes -->
 
 <!--Math explanation/simplification on board of SHA-1
@@ -66,6 +71,7 @@ Think of a digested password as a firework. It is very easy to explode a firewor
 Something like take a password, convert it to binary, break it up into three words of 8 bits, and then do something like (A&&B||C for digit 1, A||B&&C for digit 2, A&&B&&C for digit 3, etc.)
 -->
 
+<!--WDI3 11:59 --> 
 <!--11:45 20 minutes -->
 
 ## BCrypt
@@ -101,6 +107,8 @@ Next, we need to generate a salt.  We will do this with bcrypt's `genSalt()` fun
 bcrypt.genSalt(function(err, salt) {
 	console.log("Salt: " + salt);
 }); -->
+
+<!--Allowed catch-up here, starting 12:09 finish 12:14 -->
 
 Then, we need to generate a hash for our password, mixing the salt with our password before we do so.
 
@@ -144,6 +152,8 @@ bcrypt.genSalt(function(err, salt) {
 ```
 
 </details>
+
+<!--12:23 when turning over to devs in WDI3 -->
 
 How will BCrypt's compare method help us **authenticate** a `User`?
 
