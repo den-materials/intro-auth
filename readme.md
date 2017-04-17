@@ -123,6 +123,7 @@ bcrypt.compare(otherPassword, hash, function(err, res) {
 
 <details>
 <summary>Sample code</summary>
+
 ```js
 const bcrypt = require('bcrypt');
 const myPassword = 'not_bacon';
@@ -141,6 +142,7 @@ bcrypt.genSalt(function(err, salt) {
   });
 });
 ```
+
 </details>
 
 How will BCrypt's compare method help us **authenticate** a `User`?
