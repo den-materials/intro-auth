@@ -1,6 +1,6 @@
 ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
-
+<!--11:12 WDI4 -->
 <!--11:25 WDI3 -->
 <!--11:00 10 minutes -->
 
@@ -39,6 +39,7 @@ A user must always first be authenticated, then it can be determined what they a
 
 >Example: When Sarah enters a bar, a bouncer looks at her photo ID to ensure (authenticate) that she is who she claims. Sarah is thirty years old, so she is allowed (authorized) to drink.
 
+<!--11:18 WDI4-->
 <!--11:30 WDI3 -->
 <!--11:10 10 minutes -->
 
@@ -48,12 +49,15 @@ A user must always first be authenticated, then it can be determined what they a
 
 <!--11:15 actually WDI2-->
 
+<!--11:21 WDI4 -->
 <!--11:35 WDI3 -->
 <!--11:20 15 minutes -->
 
 ## Password Hashing
 
 First, let's see [how not to store a password](https://www.youtube.com/watch?v=8ZtInClXe1Q).
+
+<!--11:31 WDI4 -->
 
 In order to authenticate a user, we need to store their password in our database. This allows us to check that the user typed in the correct password when logging into our site.
 
@@ -72,6 +76,7 @@ Something like take a password, convert it to binary, break it up into three wor
 -->
 
 <!--WDI3 11:59 --> 
+<!--WDI4 11:45, 11:48 after stretch break -->
 <!--11:45 20 minutes -->
 
 ## BCrypt
@@ -82,7 +87,7 @@ Remember, remember: **never store plaintext passwords**, only the digested versi
 
 ### Playing With `BCrypt`
 
-<!--11:44 when turning over to devs, math explanation took a while, other stuff was fast -->
+<!--11:44 WDI2 when turning over to devs, math explanation took a while, other stuff was fast -->
 
 Let's create a new project to test `BCrypt`.  This will require us to:
 
@@ -91,9 +96,11 @@ Let's create a new project to test `BCrypt`.  This will require us to:
 - Create a `server.js` file
 - Require `bcrypt` at the top of `server.js`
 
+<!--11:55 WDI4 coming back from setup -->
+
 Now let's show how bcrypt creates a hashed digest of a password, and how it can test for equality of our "exploded password fireworks".
 
-<!--bCrypt is really bad at requiring a WHOLE BUNCH of stuff for configuration (python EVN variables, command-line tools)-->
+<!--bCrypt is really bad at requiring a WHOLE BUNCH of stuff for configuration (python ENV variables, command-line tools)-->
 
 First, we should create two passwords.
 
@@ -108,6 +115,7 @@ bcrypt.genSalt(function(err, salt) {
 	console.log("Salt: " + salt);
 }); -->
 
+<!--11:57 WDI4 turning over to devs -->
 <!--Allowed catch-up here, starting 12:09 finish 12:14 -->
 
 Then, we need to generate a hash for our password, mixing the salt with our password before we do so.
@@ -120,6 +128,8 @@ bcrypt.hash(myPassword, salt, function(err, hash) {
 <!--12:09 actually holy shit bcrypt laying down on the job, are you?  so many things breaking dev's projects -->
 
 Finally, let's check to see if our "exploded firework" matches our original password if we "explode" (hash) it again.  While we're at it, let's check to make sure it *doesn't* match our other password.
+
+<!--12:08 WDI4 coming back -->
 
 <!--
 bcrypt.compare(myPassword, hash, function(err, res) {
@@ -153,14 +163,15 @@ bcrypt.genSalt(function(err, salt) {
 
 </details>
 
+<!--12:12 turning over to devs WDI4, 12:15 coming back -->
 <!--12:23 when turning over to devs in WDI3 -->
 
 How will BCrypt's compare method help us **authenticate** a `User`?
 
 [BCrypt](https://en.wikipedia.org/wiki/Bcrypt) uses a ["salt"](https://en.wikipedia.org/wiki/Salt_(cryptography)) to protect against [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table) attacks and is an [adaptive function](https://codiscope.com/cryptographic-hash-functions/) (see section: "Adaptive Hash Functions") to protect against [brute-force](https://en.wikipedia.org/wiki/Brute-force_search) attacks.
 
-<!-- Catch-phrase with encryption, hash, salt, bcrypt -->
-
+<!--12:16 WDI4 -->
+<!--12:21 WDI4 -->
 <!--12:05 5 minutes -->
 
 ## Closing Thoughts
