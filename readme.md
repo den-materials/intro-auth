@@ -1,5 +1,6 @@
 ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
+<!--WDI5 11:08   -->
 <!--11:12 WDI4 -->
 <!--11:25 WDI3 -->
 <!--11:00 10 minutes -->
@@ -57,6 +58,7 @@ A user must always first be authenticated, then it can be determined what they a
 
 First, let's see [how not to store a password](https://www.youtube.com/watch?v=8ZtInClXe1Q).
 
+<!--WDI5 11:24  -->
 <!--11:31 WDI4 -->
 
 In order to authenticate a user, we need to store their password in our database. This allows us to check that the user typed in the correct password when logging into our site.
@@ -67,7 +69,6 @@ Think of a digested password as a firework. It is very easy to explode a firewor
 
 ![fireworks](http://i.giphy.com/122XXtx3oumxBm.gif)
 
-<!--WDI3 ??-->
 <!--11:35 10 minutes -->
 
 <!--Math explanation/simplification on board of SHA-1
@@ -87,6 +88,7 @@ Remember, remember: **never store plaintext passwords**, only the digested versi
 
 ### Playing With `BCrypt`
 
+<!--11:48 WDI5 turning over to devs -->
 <!--11:44 WDI2 when turning over to devs, math explanation took a while, other stuff was fast -->
 
 Let's create a new project to test `BCrypt`.  This will require us to:
@@ -97,6 +99,7 @@ Let's create a new project to test `BCrypt`.  This will require us to:
 - Require `bcrypt` at the top of `server.js`
 
 <!--11:55 WDI4 coming back from setup -->
+<!--WDI5 11:50 -->
 
 Now let's show how bcrypt creates a hashed digest of a password, and how it can test for equality of our "exploded password fireworks".
 
@@ -117,6 +120,7 @@ bcrypt.genSalt(function(err, salt) {
 
 <!--11:57 WDI4 turning over to devs -->
 <!--Allowed catch-up here, starting 12:09 finish 12:14 -->
+<!--WDI5 11:55  -->
 
 Then, we need to generate a hash for our password, mixing the salt with our password before we do so.
 
@@ -126,6 +130,7 @@ bcrypt.hash(myPassword, salt, function(err, hash) {
 }); -->
 
 <!--12:09 actually holy shit bcrypt laying down on the job, are you?  so many things breaking dev's projects -->
+<!--WDI5 12:01  -->
 
 Finally, let's check to see if our "exploded firework" matches our original password if we "explode" (hash) it again.  While we're at it, let's check to make sure it *doesn't* match our other password.
 
@@ -163,6 +168,7 @@ bcrypt.genSalt(function(err, salt) {
 
 </details>
 
+<!--WDI5 12:07  -->
 <!--12:12 turning over to devs WDI4, 12:15 coming back -->
 <!--12:23 when turning over to devs in WDI3 -->
 
@@ -181,6 +187,7 @@ How will BCrypt's compare method help us **authenticate** a `User`?
 * Why is BCrypt useful and how do we use it to authenticate a user
 * How do salts work with hashing?
 
+<!--WDI5 12:18  -->
 <!--12:33-->
 
 ## Additional Resources
